@@ -11,9 +11,7 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Noto Sans';
-  color: #2c3e50;
-  font-size: 12px;
-}
+  #app {
+    isolation: isolate;
+  }
 </style>

@@ -1,9 +1,8 @@
 <template>
-    <div class="container">
-
+    <div>
       <div class="column-left">
       <form v-on:submit.prevent="login">
-
+        <div class="login-form">
         <div class="image text-center">
           <img src="../assets/logo.png">
         </div>
@@ -28,19 +27,18 @@
         <div class="text-center p-3">
           <a v-on:click.prevent="{}"><b>¿Olvid&oacute; su contrase&ntilde;a?</b></a>
         </div>
-
+      </div>
       </form>
     </div>
     
     <div class="column-right">
       <img src="../assets/hacker-man-laptop.png"/>
     </div>
-
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import RequestController from "@/controllers/RequestController"
 export default {
   name: 'Login',
   data () {
@@ -52,36 +50,33 @@ export default {
   },
   methods: {
     login() {
-      this.msg = "";
       let json = {
-          "username": this.uname,
-          "password": this.passwd
+        "username": this.uname,
+        "password": this.passwd
       };
-      axios.post('https://2e1f-186-116-210-138.ngrok-free.app/login', json).then(
-        data => {
-          if (data.data.error == false) {
-            this.msg = data.data.message;
-          } else {
-            this.msg = data.data.error_msg;
-          }
+      RequestController.Login(json).then((data) => {
+        if (data.data.error == false) {
+          this.msg = data.data.message;
+        } else {
+          this.msg = data.data.error_msg;
         }
-      ).catch(error => {
-        this.msg = "Error: Servidor no encontrado";
+      }).catch((error) => {
+        this.msg = error;
       });
     }
-  }
+  },
 }
 </script>
 
 <style>
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .column-right {
     flex: 1;
+}
+
+.column-left {
+  margin: 0;
+  width: 50%;
+  height: 100%;
 }
 
 .column-right img {
@@ -89,12 +84,11 @@ export default {
     top: 0;
     right: 0;
     width: 50%; 
-    height: 100vh;
+    height: 100%;
 }
 
 .image {
   max-width: 300px;
   margin-bottom: 18px;
-  margin-top: 35%;
 }
 </style>

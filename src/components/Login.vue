@@ -45,7 +45,8 @@ export default {
     return {
       uname: "",
       passwd: "",
-      msg: ""
+      msg: "",
+      authtoken: ""
     }
   },
   methods: {
@@ -56,10 +57,12 @@ export default {
       };
       RequestController.Login(json).then((data) => {
         if (data.data.error == false) {
-          this.msg = data.data.message;
+          this.authtoken = data.data.message;
+          window.location.href = '/';
         } else {
           this.msg = data.data.error_msg;
         }
+        console.log(data)
       }).catch((error) => {
         this.msg = error;
       });

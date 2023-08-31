@@ -11,9 +11,14 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Noto Sans';
-  color: #2c3e50;
-  font-size: 12px;
-}
+  #app {
+    isolation: isolate;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #app > div {
+    width: 100%;
+    height: 100%;
+  }
 </style>

@@ -1,5 +1,5 @@
 * {
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -31,7 +31,9 @@ label {
 
 a {
     text-align: center;
-    color: grey;
+    /*color: grey;*/
+    text-decoration: none;
+    color: inherit;
 }
 
 img {
@@ -54,4 +56,25 @@ form .login-form {
 
 .in-alert {
     color: red;
+}
+
+nav {
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.avatar-rounded {
+  border-radius: 50%;
+}
+
+.nav-text {
+margin: 0;
+}
+
+ul li {
+    text-align: center;
+    list-style: none;
+}
+
+ul {
+    padding: 0;
 }

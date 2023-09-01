@@ -20,6 +20,7 @@
         <div class="input-group">
           <label class="col-form-label" for="password">Contrase&ntilde;a: </label>
           <input class="form-control" type="password" id="password" v-model="passwd" placeholder="**********" required/>
+          <button v-on:click.prevent="showPassword" class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa-regular fa-eye"></i></button>
         </div>
 
         <input class="btn btn-primary" type="submit" id="submit" name="login" value="login"/>
@@ -66,7 +67,16 @@ export default {
       }).catch((error) => {
         this.msg = error;
       });
-    }
+    },
+    showPassword() {
+			let password = document.getElementById('password');
+			if (password.type=="password") {
+				password.type="text";
+			}
+			else{
+				password.type="password";
+			}
+		}
   },
 }
 </script>

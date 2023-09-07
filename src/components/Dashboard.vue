@@ -43,17 +43,22 @@
     <div class="wrapper-dock">
       <div class="sidebar">
         <ul>
-          <a href="#"><li>Dashboard</li></a>
-          <a href="#"><li>Actividades</li></a>
+          <a><li>Dashboard</li></a>
+          <a><li>Actividades</li></a>
         </ul>
         <div class="logout">
           <ul>
-            <a href="#"><li>Cerrar sesión</li></a>
+            <a><li>Cerrar sesión</li></a>
           </ul>
         </div>
       </div>
 
       <div class="container-dock">
+        <div class="figure-content d-flex">
+          <figure>
+            <img src="../assets/decorador.png">
+          </figure>
+        </div>
         <router-view></router-view>
       </div>
     </div>  
@@ -61,9 +66,19 @@
 </template>
 
 <script>
-export default {
-  name: 'Dashboard'
-}
+  export default {
+    name: 'Dashboard',
+    data() {
+      return {
+        authtoken: 'fdgbserv'
+      }
+    },
+    mounted() {
+      if (this.authtoken == "") {
+        this.$router.push("/login");
+      }
+    }
+  }
 </script>
 
 <style>

@@ -12,16 +12,11 @@ body,html {
 input {
     width: 100%;
     min-height: 30px;
+    outline: 0;
 }
 
 input[type="submit"] {
-    background-color: #1E293B;
-    border: none;
     margin-top: 25px;
-}
-
-input[type="submit"]:hover {
-    background-color: #141b27;
 }
 
 label {
@@ -42,6 +37,10 @@ img {
     object-fit: cover; 
 }
 
+h1 {
+    margin: auto;
+}
+
 form {
     width: 100%;
     height: 100%;
@@ -54,12 +53,26 @@ form .login-form {
     max-width: 380px;
 }
 
-.in-alert {
-    color: red;
+ul li {
+    text-align: center;
+    list-style: none;
+}
+
+ul {
+    padding: 0;
 }
 
 nav {
   border-bottom: 1px solid #dbdbdb;
+}
+
+
+figure {
+    margin: 0 auto !important;
+}
+
+.in-alert {
+    color: red;
 }
 
 .avatar-rounded {
@@ -70,11 +83,25 @@ nav {
 margin: 0;
 }
 
-ul li {
-    text-align: center;
-    list-style: none;
+.figure-content {
+    margin-top: 25px;
 }
 
-ul {
-    padding: 0;
+.table {
+    margin: 25px;
+    padding: 50px;
+    max-width: 95%;
+}
+
+.btn-primary {
+    background-color: #1E293B;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #141b27;
+}
+
+.btn-outline-secondary {
+    border: 1px solid #dbdbdb;
 }

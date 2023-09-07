@@ -14,12 +14,12 @@
 
         <div class="input-group">
           <label class="col-form-label" for="username">Correo Electr&oacute;nico: </label>
-          <input class="form-control" type="email" id="username" v-model="uname" placeholder="johndoe@example.com" required/>
+          <input class="form-control shadow-none" type="email" id="username" v-model="uname" placeholder="johndoe@example.com" required/>
         </div>
 
         <div class="input-group">
           <label class="col-form-label" for="password">Contrase&ntilde;a: </label>
-          <input class="form-control" type="password" id="password" v-model="passwd" placeholder="**********" required/>
+          <input class="form-control shadow-none" type="password" id="password" v-model="passwd" placeholder="**********" required/>
           <button v-on:click.prevent="showPassword" class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa-regular fa-eye"></i></button>
         </div>
 
@@ -59,7 +59,7 @@ export default {
       RequestController.Login(json).then((data) => {
         if (data.data.error == false) {
           this.authtoken = data.data.message;
-          window.location.href = '/';
+          this.$router.push('/dashboard');
         } else {
           this.msg = data.data.error_msg;
         }

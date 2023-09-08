@@ -102,6 +102,34 @@ margin: 0;
     background-color: #141b27;
 }
 
+.btn-primary:active {
+    background-color: #141b27 !important;
+}
+
 .btn-outline-secondary {
     border: 1px solid #dbdbdb;
+}
+
+.sidebar-item:hover {
+    background-color: #dadada;
+}
+
+.btn-create {
+    background-color: #11a688;
+}
+
+.btn-create:hover {
+    background-color: #0f9278;
+}
+
+.btn-create:active {
+    background-color: #0f9278 !important;
+}
+
+.modal-backdrop {
+    display: none !important;
+}
+
+.bootstrap-datetimepicker-widget {
+    padding: 24px;
 }

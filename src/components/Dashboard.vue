@@ -7,10 +7,6 @@
             <img src="../assets/logo.png" width="140">
           </div>
         </div>
-        <!--div class="m-0">
-          <span>Hola {{ username }}!</span>
-          <p class="nav-text">Bienvenido nuevamente.</p>
-        </div-->
       </div>
       <div class="container-fluid justify-content-end">
         <div class="dropdown p-3">
@@ -43,12 +39,19 @@
     <div class="wrapper-dock">
       <div class="sidebar">
         <ul>
-          <a><li>Dashboard</li></a>
-          <a><li>Actividades</li></a>
+          <li></li>
+          <a><li class="sidebar-item">
+            <i class="fa-solid fa-house"></i> Dashboard</li>
+          </a>
+          <a><li class="sidebar-item">
+            <i class="fa-solid fa-chart-line"></i> Actividades</li>
+          </a>
         </ul>
         <div class="logout">
           <ul>
-            <a><li>Cerrar sesión</li></a>
+            <a><li class="sidebar-item">
+              <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+            </li></a>
           </ul>
         </div>
       </div>

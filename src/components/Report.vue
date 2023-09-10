@@ -4,7 +4,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Creaci&oacute;n de actividades</h5>
+            <h5 class="modal-title">Creaci&oacute;n de Reportes</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -25,25 +25,20 @@
                 <div class="form-group">
                   <label for="date">Fecha en que se realiza:</label>
                   <date-picker v-model="date" @dp-hide="doSomethingOnHide" @dp-change="doSomethingOnChange"
-                    id="date"></date-picker>
+                    id="date" class="shadow-none"></date-picker>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="time">Duración en horas:</label>
-                  <input type="number" class="form-control" id="time">
+                  <input type="number" class="form-control shadow-none" id="time">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="total-row form-group">
-                <label for="project">Seleccione un proyecto:</label>
-                <select class="form-select shadow-none" aria-label="Default select example" id="project">
-                  <option selected>Seleccionar</option>
-                  <option value="1">Cargos Fijos</option>
-                  <option value="2">Desembolsos digitales</option>
-                  <option value="3">Reporte de Actividades</option>
-                </select>
+                <label for="project">Nombre del proyecto:</label>
+                <input type="text" class="form-control shadow-none" id="project">
               </div>
             </div>
             <div class="row">
@@ -104,16 +99,21 @@
         </tbody>
       </table>
     </div>
+    <hr>
     <nav aria-label="Page navigation example" class="pagination-nav">
       <ul class="pagination justify-content-end">
         <li class="page-item disabled">
-          <a class="page-link">Previous</a>
+          <a class="page-link">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item">
-          <a class="page-link" href="#">Next</a>
+          <a class="page-link">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
         </li>
       </ul>
     </nav>
@@ -129,7 +129,7 @@ export default {
 <style>
 .table-contain {
   overflow: auto;
-  max-height: 450px;
+  max-height: 380px;
 }
 
 .right-search {
@@ -144,6 +144,7 @@ export default {
 
 .pagination-nav {
   margin-right: 35px;
+  border: none;
 }
 
 .total-row {

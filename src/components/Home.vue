@@ -25,7 +25,6 @@
             <li class="dropdown-item">Mi perfil</li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-item">Usuario 1</li>
-            <li class="dropdown-item">Usuario 2</li>
           </ul>
         </div>
         <div class="m-0">
@@ -40,18 +39,24 @@
       <div class="sidebar">
         <ul>
           <li></li>
-          <a><li class="sidebar-item">
-            <i class="fa-solid fa-house"></i> Dashboard</li>
+          <a>
+            <li class="sidebar-item">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </li>
           </a>
-          <a><li class="sidebar-item">
-            <i class="fa-solid fa-chart-line"></i> Actividades</li>
+          <a>
+            <li class="sidebar-item">
+              <i class="fa-solid fa-chart-line"></i> Actividades
+            </li>
           </a>
         </ul>
         <div class="logout">
           <ul>
-            <a><li class="sidebar-item">
-              <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
-            </li></a>
+            <a>
+              <li class="sidebar-item">
+                <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+              </li>
+            </a>
           </ul>
         </div>
       </div>
@@ -64,36 +69,31 @@
         </div>
         <router-view></router-view>
       </div>
-    </div>  
+    </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Home'
-  }
+export default {
+  name: 'Home'
+}
 </script>
 
 <style>
-  :root {
-    --nav-height: 200px;
-  }
+.logout {
+  height: fit-content;
+  padding: 40px 0;
+}
 
-  .logout {
-    height: fit-content;
-    padding: 40px 0;
-  }
+.logout * {
+  margin: 0 auto;
+}
 
-  .logout * {
-    margin: 0 auto;
-  }
+.wrapper-dock {
+  display: flex;
+  flex-grow: 1;
+}
 
-  .wrapper-dock {
-    display: flex;
-    flex-grow: 1;
-  }
-
-  .container-dock {
-    flex: 1;
-  }
-</style>
+.container-dock {
+  flex: 1;
+}</style>

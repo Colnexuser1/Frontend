@@ -59,7 +59,7 @@ export default {
       RequestController.Login(json).then((data) => {
         if (data.data.error == false) {
           this.authtoken = data.data.message;
-          this.$router.push('/dashboard');
+          this.$router.push('/');
         } else {
           this.msg = data.data.error_msg;
         }

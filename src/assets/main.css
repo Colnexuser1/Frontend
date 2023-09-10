@@ -6,7 +6,7 @@
 
 body,html {
     font-family: 'Noto Sans';
-    font-size: 16px;
+    font-size: 14px;
 }
 
 input {
@@ -130,6 +130,27 @@ margin: 0;
     display: none !important;
 }
 
-.bootstrap-datetimepicker-widget {
-    padding: 24px;
+.bootstrap-datetimepicker-widget * {
+    padding: 6px;
 }
+
+.sidebar {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dbdbdb;
+  }
+
+.sidebar ul li {
+    padding: 10px 5px;
+}
+
+.page-link {
+    color: #1e293b;
+  }
+  
+  .page-link:hover {
+    color: #204274;
+  }

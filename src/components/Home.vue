@@ -70,17 +70,7 @@
 
 <script>
   export default {
-    name: 'Dashboard',
-    data() {
-      return {
-        authtoken: 'fdgbserv'
-      }
-    },
-    mounted() {
-      if (this.authtoken == "") {
-        this.$router.push("/login");
-      }
-    }
+    name: 'Home'
   }
 </script>
 
@@ -88,10 +78,6 @@
   :root {
     --nav-height: 200px;
   }
-
-  .sidebar ul li {
-    padding: 10px 5px;
-}
 
   .logout {
     height: fit-content;
@@ -109,14 +95,5 @@
 
   .container-dock {
     flex: 1;
-  }
-
-  .sidebar {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #f8f9fa;
-    border-right: 1px solid #dbdbdb;
   }
 </style>

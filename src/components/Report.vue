@@ -78,84 +78,32 @@
         </form>
       </div>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Fecha creación</th>
-          <th scope="col">horas</th>
-          <th scope="col">Actividad</th>
-          <th scope="col">Etapa</th>
-          <th scope="col">Proyecto</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">2023-04-14 20:12</th>
-          <td>8</td>
-          <td>PADXXXXXX</td>
-          <td>Desarrollo</td>
-          <td>Proyecto XX</td>
-          <td><i class="fa-solid fa-pen"></i></td>
-          <td><i class="fa-solid fa-trash"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">2023-04-14 20:12</th>
-          <td>8</td>
-          <td>PADXXXXXX</td>
-          <td>Desarrollo</td>
-          <td>Proyecto XX</td>
-          <td><i class="fa-solid fa-pen"></i></td>
-          <td><i class="fa-solid fa-trash"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">2023-04-14 20:12</th>
-          <td>8</td>
-          <td>PADXXXXXX</td>
-          <td>Desarrollo</td>
-          <td>Proyecto XX</td>
-          <td><i class="fa-solid fa-pen"></i></td>
-          <td><i class="fa-solid fa-trash"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">2023-04-14 20:12</th>
-          <td>8</td>
-          <td>PADXXXXXX</td>
-          <td>Desarrollo</td>
-          <td>Proyecto XX</td>
-          <td><i class="fa-solid fa-pen"></i></td>
-          <td><i class="fa-solid fa-trash"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">2023-04-14 20:12</th>
-          <td>8</td>
-          <td>PADXXXXXX</td>
-          <td>Desarrollo</td>
-          <td>Proyecto XX</td>
-          <td><i class="fa-solid fa-pen"></i></td>
-          <td><i class="fa-solid fa-trash"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">2023-04-14 20:12</th>
-          <td>8</td>
-          <td>PADXXXXXX</td>
-          <td>Desarrollo</td>
-          <td>Proyecto XX</td>
-          <td><i class="fa-solid fa-pen"></i></td>
-          <td><i class="fa-solid fa-trash"></i></td>
-        </tr>
-        <tr>
-          <th scope="row">2023-04-14 20:12</th>
-          <td>8</td>
-          <td>PADXXXXXX</td>
-          <td>Desarrollo</td>
-          <td>Proyecto XX</td>
-          <td><i class="fa-solid fa-pen"></i></td>
-          <td><i class="fa-solid fa-trash"></i></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-contain">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Fecha creación</th>
+            <th scope="col">horas</th>
+            <th scope="col">Actividad</th>
+            <th scope="col">Etapa</th>
+            <th scope="col">Proyecto</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">2023-04-14 20:12</th>
+            <td>8</td>
+            <td>PADXXXXXX</td>
+            <td>Desarrollo</td>
+            <td>Proyecto XX</td>
+            <td><i class="fa-solid fa-pen"></i></td>
+            <td><i class="fa-solid fa-trash"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <nav aria-label="Page navigation example" class="pagination-nav">
       <ul class="pagination justify-content-end">
         <li class="page-item disabled">
@@ -174,11 +122,16 @@
 
 <script>
 export default {
-  name: "Actividades"
+  name: "Report"
 }
 </script>
 
 <style>
+.table-contain {
+  overflow: auto;
+  max-height: 450px;
+}
+
 .right-search {
   width: 450px;
   margin: 25px;
@@ -191,14 +144,6 @@ export default {
 
 .pagination-nav {
   margin-right: 35px;
-}
-
-.page-link {
-  color: #1e293b;
-}
-
-.page-link:hover {
-  color: #204274;
 }
 
 .total-row {

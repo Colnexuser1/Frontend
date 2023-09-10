@@ -1,28 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dashboard from '@/components/Dashboard'
+import Home from '@/components/Home'
 import Error404 from '@/components/Error404'
 import Login from '@/components/Login'
-import Actividades from '@/components/Actividades'
+import Report from '@/components/Report'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: Dashboard,
+      path: '/',
+      name: 'Home',
+      component: Home,
       children: [
         {
           path: '',
           name: 'Dashboard',
-          redirect: Actividades
+          redirect: Report
         },
         {
-          path: 'actividades',
-          name: 'Actividades',
-          component: Actividades
+          path: 'report',
+          name: 'Report',
+          component: Report
         }
       ]
     },
@@ -35,10 +35,6 @@ export default new Router({
       path: '/error404',
       name: 'Error404',
       component: Error404
-    },
-    {
-      path: '/',
-      redirect: Dashboard
     },
     {
       path: '*',

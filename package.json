@@ -19,6 +19,7 @@
     "vue": "^2.5.2",
     "vue-axios": "^3.5.2",
     "vue-bootstrap-datetimepicker": "^5.0.1",
+    "vue-bootstrap-typeahead": "^0.2.6",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

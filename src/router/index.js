@@ -15,11 +15,6 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: '',
-          name: 'Dashboard',
-          redirect: Report
-        },
-        {
           path: 'report',
           name: 'Report',
           component: Report

@@ -47,21 +47,21 @@ export default {
       uname: "",
       passwd: "",
       msg: "",
-      authtoken: ""
+      user: {}
     }
   },
   methods: {
     login() {
       let json = {
-        "username": this.uname,
+        "email": this.uname,
         "password": this.passwd
       };
       RequestController.Login(json).then((data) => {
-        if (data.data.error == false) {
-          this.authtoken = data.data.message;
-          this.$router.push('/');
+        if (data.status == "400") {
+          this.msg = data.data.message;
         } else {
-          this.msg = data.data.error_msg;
+          this.user = data.data.user;
+          this.$router.push('/');
         }
         console.log(data)
       }).catch((error) => {
@@ -82,6 +82,18 @@ export default {
 </script>
 
 <style>
+form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form .login-form {
+  max-width: 380px;
+}
+
 .column-right {
     flex: 1;
 }

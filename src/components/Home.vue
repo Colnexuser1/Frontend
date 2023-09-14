@@ -15,9 +15,9 @@
           </a>
           <ul class="dropdown-menu">
             <li v-if="notificationlist.length == 0" class="dropdown-item">No tienes notificaciones</li>
-            <v-else>
+            <div v-else>
               <li class="border-bottom" v-for="notification in notificationlist">{{ notification }}</li>
-            </v-else>
+            </div>
           </ul>
         </div>
         <div class="dropdown p-3">
@@ -42,12 +42,12 @@
       <div class="sidebar">
         <ul>
           <li></li>
-          <a>
+          <a href="" v-on:click.prevent="$router.push('/')">
             <li class="sidebar-item">
               <i class="fa-solid fa-house"></i> Dashboard
             </li>
           </a>
-          <a>
+          <a href="" v-on:click.prevent="$router.push('/report')">
             <li class="sidebar-item">
               <i class="fa-solid fa-chart-line"></i> Actividades
             </li>
@@ -85,7 +85,8 @@ export default {
       reportlist: this.$parent.reports,
       stageslist: this.$parent.stages,
       pageitemlist: this.$parent.pageitems,
-      notificationlist: this.$parent.notifications
+      notificationlist: this.$parent.notifications,
+      projectlist: this.$parent.projects
     }
   }
 }

@@ -1,65 +1,71 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: none;
 }
 
-body,html {
-    font-family: 'Noto Sans';
-    font-size: 14px;
+body,
+html {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 14px;
 }
 
 input {
-    width: 100%;
-    min-height: 30px;
-    outline: 0;
+  width: 100%;
+  min-height: 30px;
+  outline: 0;
+}
+
+textarea {
+  max-height: 280px;
 }
 
 input[type="submit"] {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 label {
-    font-weight: 600;
-    width: 100%;
+  font-weight: 600;
+  width: 100%;
 }
 
 a {
-    text-align: center;
-    /*color: grey;*/
-    text-decoration: none;
-    color: inherit;
+  text-align: center;
+  /*color: grey;*/
+  text-decoration: none;
+  color: inherit;
 }
 
 img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover; 
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
 }
 
 h1 {
-    margin: auto;
+  margin: auto;
 }
 
 form {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 form .login-form {
-    max-width: 380px;
+  max-width: 380px;
 }
 
 ul li {
-    text-align: center;
-    list-style: none;
+  text-align: center;
+  list-style: none;
 }
 
 ul {
-    padding: 0;
+  padding: 0;
 }
 
 nav {
@@ -68,11 +74,11 @@ nav {
 
 
 figure {
-    margin: 0 auto !important;
+  margin: 0 auto !important;
 }
 
 .in-alert {
-    color: red;
+  color: red;
 }
 
 .avatar-rounded {
@@ -80,77 +86,78 @@ figure {
 }
 
 .nav-text {
-margin: 0;
+  margin: 0;
 }
 
 .figure-content {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .table {
-    margin: 25px;
-    padding: 50px;
-    max-width: 95%;
+  margin: 25px;
+  padding: 50px;
+  max-width: 95%;
 }
 
 .btn-primary {
-    background-color: #1E293B;
-    border: none;
+  background-color: #1E293B;
+  border: none;
 }
 
 .btn-primary:hover {
-    background-color: #141b27;
+  background-color: #141b27;
 }
 
 .btn-primary:active {
-    background-color: #141b27 !important;
+  background-color: #141b27 !important;
 }
 
 .btn-outline-secondary {
-    border: 1px solid #dbdbdb;
+  border: 1px solid #dbdbdb;
 }
 
 .sidebar-item:hover {
-    background-color: #dadada;
+  background-color: #dadada;
 }
 
 .btn-create {
-    background-color: #11a688;
+  background-color: #11a688;
 }
 
 .btn-create:hover {
-    background-color: #0f9278;
+  background-color: #0f9278;
 }
 
 .btn-create:active {
-    background-color: #0f9278 !important;
+  background-color: #0f9278 !important;
 }
 
 .modal-backdrop {
-    display: none !important;
-}
-
-.bootstrap-datetimepicker-widget * {
-    padding: 6px;
+  display: none !important;
 }
 
 .sidebar {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #f8f9fa;
-    border-right: 1px solid #dbdbdb;
-  }
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  border-right: 1px solid #dbdbdb;
+}
 
 .sidebar ul li {
-    padding: 10px 5px;
+  padding: 10px 5px;
 }
 
 .page-link {
-    color: #1e293b;
-  }
-  
-  .page-link:hover {
-    color: #204274;
-  }
+  color: #1e293b;
+}
+
+.page-link:hover {
+  color: #204274;
+}
+
+.maintitle h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}

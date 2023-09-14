@@ -1,5 +1,8 @@
 <template>
   <div class="border-top">
+    <div class="maintitle px-4 mt-2">
+      <h1>Reporte de actividades</h1>
+    </div>
     <div class="modal" tabindex="-1" id="activityModal" data-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -8,47 +11,44 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <p>{{ msg }}</p>
             <div class="row">
               <div class="total-row form-group">
                 <label for="title">Titulo:</label>
-                <input class="form-control shadow-none" type="text" id="title" required>
+                <input v-model="title" class="form-control shadow-none" type="text" id="title" required>
               </div>
             </div>
             <div class="row">
               <div class="total-row form-group">
                 <label for="description">Descripción:</label>
-                <input class="form-control shadow-none" type="text" id="description">
+                <textarea v-model="description" id="description" class="form-control shadow-none"></textarea>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="date">Fecha en que se realiza:</label>
-                  <date-picker v-model="date" @dp-hide="doSomethingOnHide" @dp-change="doSomethingOnChange"
-                    id="date" class="shadow-none"></date-picker>
+                  <b-form-datepicker v-model="date" class="form-control shadow-none" date-format-options="{day:'numeric',month:'numeric',year:'numeric'}" locale="es" id="date"></b-form-datepicker>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="time">Duración en horas:</label>
-                  <input type="number" class="form-control shadow-none" id="time">
+                  <input type="number" v-model="hours" class="form-control shadow-none" id="time">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="total-row form-group">
                 <label for="project">Nombre del proyecto:</label>
-                <input type="text" class="form-control shadow-none" id="project">
+                <input type="text" v-model="project" class="form-control shadow-none" id="project">
               </div>
             </div>
             <div class="row">
               <div class="total-row form-group">
                 <label for="stage">Seleccione una etapa:</label>
-                <select class="form-select shadow-none" aria-label="Default select example" id="stage">
-                  <option selected>Seleccionar</option>
-                  <option value="1">Desarrollo</option>
-                  <option value="2">Pruebas</option>
-                  <option value="3">Analisis</option>
+                <select v-model="stage" class="form-select shadow-none" aria-label="Default select example" id="stage">
+                  <option v-for="stage in stagelist">{{ stage }}</option>
                 </select>
               </div>
             </div>
@@ -67,7 +67,7 @@
         </button>
       </div>
       <div class="right-search nav">
-        <form class="d-flex" role="search">
+        <form class="d-flex" role="search" v-on:click.prevent="">
           <input class="form-control me-2 shadow-none" type="search" aria-label="Search">
           <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
@@ -77,7 +77,8 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Fecha creación</th>
+            <th scope="col">Fecha creaci&oacute;n</th>
+            <th scope="col">Descripci&oacute;n</th>
             <th scope="col">horas</th>
             <th scope="col">Actividad</th>
             <th scope="col">Etapa</th>
@@ -87,19 +88,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">2023-04-14 20:12</th>
-            <td>8</td>
-            <td>PADXXXXXX</td>
-            <td>Desarrollo</td>
-            <td>Proyecto XX</td>
-            <td><i class="fa-solid fa-pen"></i></td>
-            <td><i class="fa-solid fa-trash"></i></td>
+          <tr v-for="report in reportlist">
+            <th scope="row">{{ report.date }}</th>
+            <td>{{ report.description }}</td>
+            <td>{{ report.hours }}</td>
+            <td>{{ report.title }}</td>
+            <td>{{ report.stage }}</td>
+            <td>{{ report.projectname }}</td>
+            <td><a><i class="fa-solid fa-pen"></i></a></td>
+            <td><a href="#" v-on:click.prevent="deletereport(report)"><i class="fa-solid fa-trash"></i></a></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <hr>
     <nav aria-label="Page navigation example" class="pagination-nav">
       <ul class="pagination justify-content-end">
         <li class="page-item disabled">
@@ -107,8 +108,8 @@
             <i class="fa-solid fa-chevron-left"></i>
           </a>
         </li>
-        <li class="page-item">
-          <a class="page-link">1</a>
+        <li class="page-item" v-for="item in pageitemlist">
+          <a class="page-link">{{ item }}</a>
         </li>
         <li class="page-item">
           <a class="page-link">
@@ -122,7 +123,26 @@
 
 <script>
 export default {
-  name: "Report"
+  name: "Report",
+  data() {
+    return {
+      title: "",
+      description: "",
+      date: "",
+      hours: "",
+      project: "",
+      stage: "",
+      msg: "",
+      reportlist: this.$parent.reportlist,
+      stagelist: this.$parent.stageslist,
+      pageitemlist: this.$parent.pageitemlist
+    }
+  },
+  methods: {
+    deletereport(report) {
+      this.reportlist.splice(this.reportlist.indexOf(report));
+    }
+  }
 }
 </script>
 
@@ -149,5 +169,9 @@ export default {
 
 .total-row {
   padding: 12px;
+}
+
+.b-calendar .b-calendar-grid {
+  padding: 8px;
 }
 </style>

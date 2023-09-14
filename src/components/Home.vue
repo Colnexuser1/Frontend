@@ -14,7 +14,10 @@
             <i class="fa-regular fa-bell"></i>
           </a>
           <ul class="dropdown-menu">
-            <li class="dropdown-item">No tienes notificaciones</li>
+            <li v-if="notificationlist.length == 0" class="dropdown-item">No tienes notificaciones</li>
+            <v-else>
+              <li class="border-bottom" v-for="notification in notificationlist">{{ notification }}</li>
+            </v-else>
           </ul>
         </div>
         <div class="dropdown p-3">
@@ -24,7 +27,7 @@
           <ul class="dropdown-menu">
             <li class="dropdown-item">Mi perfil</li>
             <li class="dropdown-divider"></li>
-            <li class="dropdown-item">Usuario 1</li>
+            <li v-for="user in userslist" class="dropdown-item">{{ user }}</li>
           </ul>
         </div>
         <div class="m-0">
@@ -75,7 +78,16 @@
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  data() {
+    return {
+      userslist: this.$parent.users,
+      reportlist: this.$parent.reports,
+      stageslist: this.$parent.stages,
+      pageitemlist: this.$parent.pageitems,
+      notificationlist: this.$parent.notifications
+    }
+  }
 }
 </script>
 

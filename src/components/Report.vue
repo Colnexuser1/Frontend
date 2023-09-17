@@ -6,7 +6,7 @@
     <div class="modal" tabindex="-1" id="activityModal" data-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form class="" v-on:click.prevent="" novalidate>
+          <form v-on:click.prevent="{ }" novalidate>
             <div class="modal-header">
               <h5 class="modal-title">{{ opccrud }} de Actividades</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -14,29 +14,22 @@
             </div>
             <div class="modal-body">
               <div class="row">
-                <div class="total-row form-group form-check has-validation">
+                <div class="total-row form-group">
                   <label for="title">Nombre de la actividad:</label>
-                  <input v-model="form.title" class="form-control shadow-none" type="text" id="title"
-                    aria-describedby="inputGroupPrepend" required>
-                  <div class="valid-feedback">
-                    ¡Se ve bien!
-                  </div>
-                  <div class="invalid-feedback">
-                    Por favor, elije un nombre de usuario.
-                  </div>
+                  <input v-model="newReport.title" class="form-control shadow-none" type="text" id="title" required>
                 </div>
               </div>
               <div class="row">
                 <div class="total-row form-group">
                   <label for="description">Descripción de la actividad:</label>
-                  <textarea v-model="description" id="description" class="form-control shadow-none" required></textarea>
+                  <textarea v-model="newReport.description" id="description" class="form-control shadow-none" required></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="date">Fecha en que se realiza:</label>
-                    <b-form-datepicker placeholder="" :min="min" v-model="date" class="form-control shadow-none"
+                    <b-form-datepicker placeholder="" :min="min" :max="max" v-model="newReport.date" class="form-control shadow-none"
                       :date-format-options="{ day: 'numeric', month: 'numeric', year: 'numeric' }" locale="es"
                       id="date"></b-form-datepicker>
                   </div>
@@ -44,20 +37,20 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="time">Duración en horas:</label>
-                    <input type="number" v-model="hours" class="form-control shadow-none" id="time" required>
+                    <input type="number" v-model="newReport.hours" class="form-control shadow-none" id="time" required>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="total-row form-group">
                   <label for="project">Nombre del proyecto:</label>
-                  <vue-bootstrap-typeahead v-model="project" class="shadow-none" id="project" :data="projectlist" />
+                  <vue-bootstrap-typeahead v-model="newReport.project" class="shadow-none" showAllResults="true" :minMatchingChars="1" inputClass="shadow-none" id="project" :data="projectlist" />
                 </div>
               </div>
               <div class="row">
                 <div class="total-row form-group">
                   <label for="stage">Seleccione una etapa:</label>
-                  <select v-model="stage" class="form-select shadow-none" aria-label="Default select example" id="stage"
+                  <select v-model="newReport.stage" class="form-select shadow-none" aria-label="Default select example" id="stage"
                     required>
                     <option v-for="stage in stagelist">{{ stage }}</option>
                   </select>
@@ -67,7 +60,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                 v-on:click="resetcrud()">Cerrar</button>
-              <button type="submit" class="btn btn-primary" v-on:click="processcrud()">Guardar</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="processcrud()">Guardar</button>
             </div>
           </form>
         </div>
@@ -108,7 +101,7 @@
             <td>{{ report.hours }}</td>
             <td>{{ report.title }}</td>
             <td>{{ report.stage }}</td>
-            <td>{{ report.projectname }}</td>
+            <td>{{ report.project }}</td>
             <td><a href="#" data-bs-toggle="modal" data-bs-target="#activityModal" v-on:click.prevent="datedit(report)">
                 <i class="fa-solid fa-pen"></i>
               </a></td>
@@ -142,20 +135,23 @@
 
 <script>
 export default {
-    name: "Report",
+  name: "Report",
   data() {
     const today = new Date();
     const mindate = new Date(today);
     mindate.setDate(mindate.getDate() - 3);
     return {
-      title: "",
-      description: "",
-      date: "",
-      hours: "",
-      actitemreport: null,
-      project: "",
-      searchinput: "",
-      stage: "",
+      actualReport: NaN,
+      newReport: {
+        title: "",
+        description: "",
+        date: "",
+        hours: "",
+        project: "",
+        stage: ""
+      },
+      min: mindate,
+      max: today,
       opccrud: "",
       reportlist: this.$parent.reportlist,
       stagelist: this.$parent.stageslist,
@@ -164,63 +160,32 @@ export default {
     }
   },
   methods: {
-    searchdata(data) {
-      if (this.projectlist.includes(data)) {
-        console.log(this.projectlist[this.projectlist.indexOf(data)]);
-      } else if (this.stagelist.includes(data)) {
-        console.log(this.stagelist[this.stagelist.indexOf(data)]);
-      }
-      searchinput = "";
-    },
     deletereport(report) {
-      this.reportlist.splice(this.reportlist.indexOf(report));
+      this.reportlist.splice(this.reportlist.indexOf(report), 1);
     },
     datedit(report) {
-      this.actitemreport = report;
       this.opccrud = 'Modificación';
-      let index = this.reportlist.indexOf(report);
-
-      this.title = this.reportlist[index].title;
-      this.description = this.reportlist[index].description;
-      this.date = this.reportlist[index].date;
-      this.hours = this.reportlist[index].hours;
-      this.project = this.reportlist[index].projectname;
-      this.stage = this.reportlist[index].stage;
+      this.newReport = {...report};
+      this.actualReport = this.reportlist.indexOf(report);
     },
     resetcrud() {
-      this.title = "";
-      this.description = "";
-      this.date = "";
-      this.hours = "";
-      this.project = "";
-      this.stage = "";
+      this.newReport = {
+        title: "",
+        description: "",
+        date: "",
+        hours: "",
+        project: "",
+        stage: ""
+      };
+      this.actualReport = NaN;
     },
     processcrud() {
-      if (this.title == "" || this.description == "" || this.date == "" || this.hours == "" || this.project == "" || this.stage == "") {
-        console.log("Por favor rellene todos los campos");
-      } else if (!this.projectlist.includes(this.project)) {
-        console.log("Por favor ingrese un proyecto válido");
-      } else {
-        if (this.opccrud == "Creación") {
-          this.reportlist.push({
-            title: this.title,
-            description: this.description,
-            date: this.date,
-            hours: this.hours,
-            projectname: this.project,
-            stage: this.stage
-          })
-        } else if (this.opccrud == "Modificación") {
-          let index = this.reportlist.indexOf(this.actitemreport);
-          this.reportlist[index].title = this.title;
-          this.reportlist[index].description = this.description;
-          this.reportlist[index].date = this.date;
-          this.reportlist[index].hours = this.hours;
-          this.reportlist[index].projectname = this.project;
-          this.reportlist[index].stage = this.stage;
-        }
-        this.resetcrud();
+      if (this.opccrud == "Creación") {
+        this.reportlist.push({...this.newReport});
+      } else if (this.opccrud == "Modificación") {
+        this.reportlist[this.actualReport] = {...this.newReport};
       }
+      this.resetcrud();
     }
   }
 }

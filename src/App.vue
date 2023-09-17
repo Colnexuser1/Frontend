@@ -16,25 +16,23 @@ export default {
       reports: [
         {
           title: "PAD1042",
-          description: "Se crea PAD para cargue masivo al archivo siil60b",
+          description: "Se crea PAD para cargue masivo al archivo SIIL60G",
           date: "2023-12-04",
           hours: 4,
-          projectname: "Cargos Fijos - Consulta de cupos",
+          project: "Desembolsos digitales - Consulta de cupos",
           stage: "Desarrollo"
         },
         {
           title: "PAD1043",
-          description: "Se crea PAD para cargue masivo al archivo siil60g",
+          description: "Se crea PAD para cargue masivo al archivo SIIL60G",
           date: "2023-09-04",
           hours: 4,
-          projectname: "Cargos Fijos - Consulta de cupos",
+          project: "Cargos Fijos - Consulta de cupos",
           stage: "Desarrollo"
         }
       ],
       pageitems: [1, 2],
       notifications: [
-        "Se ha",
-        "Te han"
       ],
       stages: [
         "Desarrollo",
@@ -44,7 +42,7 @@ export default {
       projects: [
         "Ampliación de cargos fijos",
         "Desembolsos digitales - VMA",
-        "Desembolsos digitales - cupos"
+        "Desembolsos digitales - Consulta de cupos"
       ]
     }
   }

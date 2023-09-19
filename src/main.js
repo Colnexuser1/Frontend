@@ -7,7 +7,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
 import datePicker from 'vue-bootstrap-datetimepicker'
-import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+import VueBootstrapAutocomplete from '@vue-bootstrap-components/vue-bootstrap-autocomplete'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -19,7 +19,7 @@ Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(datePicker)
 
-Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+Vue.component('vue-bootstrap-autocomplete', VueBootstrapAutocomplete)
 
 /* eslint-disable no-new */
 new Vue({

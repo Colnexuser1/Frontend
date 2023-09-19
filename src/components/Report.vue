@@ -6,7 +6,7 @@
     <div class="modal" tabindex="-1" id="activityModal" data-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form v-on:click.prevent="{ }" novalidate>
+          <form v-on:click.prevent="{}" novalidate>
             <div class="modal-header">
               <h5 class="modal-title">{{ opccrud }} de Actividades</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -44,7 +44,7 @@
               <div class="row">
                 <div class="total-row form-group">
                   <label for="project">Nombre del proyecto:</label>
-                  <vue-bootstrap-typeahead v-model="newReport.project" class="shadow-none" showAllResults="true" :minMatchingChars="1" inputClass="shadow-none" id="project" :data="projectlist" />
+                  <vue-bootstrap-autocomplete v-model="newReport.project" class="shadow-none" showAllResults="true" :minMatchingChars="1" inputClass="shadow-none" id="project" :data="projectlist" />
                 </div>
               </div>
               <div class="row">
@@ -75,7 +75,7 @@
       </div>
       <div class="right-search nav">
         <form class="d-flex" role="search" v-on:click.prevent="">
-          <input class="form-control me-2 shadow-none" type="search" v-model="searchinput" aria-label="Search">
+          <input class="form-control me-2 shadow-none" type="search" aria-label="Search">
           <button class="btn btn-primary" type="submit" v-on:click="searchdata(searchinput)">Buscar</button>
         </form>
       </div>
@@ -214,10 +214,5 @@ export default {
 
 .total-row {
   padding: 12px;
-}
-
-.b-calendar .b-calendar-grid {
-  padding: 8px;
-  box-shadow: none;
 }
 </style>

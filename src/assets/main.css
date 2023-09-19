@@ -147,3 +147,8 @@ figure {
   font-size: 1.7rem;
   font-weight: 600;
 }
+
+.b-calendar .b-calendar-grid {
+  padding: 8px;
+  box-shadow: none;
+}

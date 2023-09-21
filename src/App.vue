@@ -31,6 +31,24 @@ export default {
           stage: "Desarrollo"
         }
       ],
+      proyect: [
+        {
+          proyectid: "PPM53495",
+          name: "Proyecto Core inmobiliario",
+          status: "Desarrollo",
+          Source: FMCA048458,
+          labdate: "2023-12-04",
+          prodate: "2024-01-05"
+        },
+        {
+          proyectid: "PPM05845",
+          name: "Modulo nuevo de normalizaciones",
+          status: "2023-12-04",
+          Source: FMCA033486,
+          labdate: "2023-12-04",
+          prodate: "2024-03-04"
+        }
+      ],
       pageitems: [1, 2],
       notifications: [
       ],

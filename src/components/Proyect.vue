@@ -8,7 +8,7 @@
         <div class="modal-content">
           <form v-on:click.prevent="{}" novalidate>
             <div class="modal-header">
-              <h5 class="modal-title">{{ opccrud }} de Actividades</h5>
+              <h5 class="modal-title">{{ opccrud }} de Proyectos</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                 v-on:click="resetcrud()"></button>
             </div>
@@ -16,7 +16,7 @@
               <div class="row">
                 <div class="total-row form-group">
                   <label for="title">Número del proyecto:</label>
-                  <input v-model="newReport.title" class="form-control shadow-none" type="text" id="title" required>
+                  <input v-model="newReport.proyectid" class="form-control shadow-none" type="text" id="proyectid" required>
                 </div>
               </div>
               <div class="row">
@@ -51,8 +51,11 @@
               </div>
                             <div class="row">
                 <div class="total-row form-group">
-                  <label for="source">Fuente en desarrollo:</label>
-                  <vue-bootstrap-autocomplete class="shadow-none" showAllResults="true" :minMatchingChars="1" inputClass="shadow-none" id="source" :data="projectlist" />
+                  <label for="stage">Fuente de desarrollo:</label>
+                  <select v-model="newReport.stage" class="form-select shadow-none" aria-label="Default select example" id="stage"
+                    required>
+                    <option v-for="stage in stagelist">{{ stage}}</option>
+                    </select>
                 </div>
               </div>
               <div class="row">
@@ -103,7 +106,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="report in reportlist">
+          <tr v-for="report in proyect">
 
             <td>{{ report.title }}</td>
             <td>{{ report.project }}</td>
@@ -121,7 +124,7 @@
         </tbody>
       </table>
     </div>
-    <nav v-if="reportlist.length > 0 && pageitemlist.length > 0" aria-label="Page navigation example"
+    <nav v-if="proyect.length > 0 && pageitemlist.length > 0" aria-label="Page navigation example"
       class="pagination-nav">
       <ul class="pagination justify-content-end">
         <li class="page-item disabled">
@@ -152,17 +155,17 @@ export default {
     return {
       actualReport: NaN,
       newReport: {
-        title: "",
-        description: "",
-        date: "",
-        hours: "",
+        proyectid: "",
+        project: "",
+        stage: "",
+        hour: "",
         project: "",
         stage: ""
       },
       min: mindate,
       max: today,
       opccrud: "",
-      reportlist: this.$parent.reportlist,
+      proyectlist: this.$parent.proyectlist,
       stagelist: this.$parent.stageslist,
       pageitemlist: this.$parent.pageitemlist,
       projectlist: this.$parent.projectlist
@@ -170,19 +173,19 @@ export default {
   },
   methods: {
     deletereport(report) {
-      this.reportlist.splice(this.reportlist.indexOf(report), 1);
+      this.proyectlist.splice(this.proyectlist.indexOf(report), 1);
     },
     datedit(report) {
       this.opccrud = 'Modificación';
       this.newReport = {...report};
-      this.actualReport = this.reportlist.indexOf(report);
+      this.actualReport = this.proyect.indexOf(report);
     },
     resetcrud() {
       this.newReport = {
-        title: "",
+        proyectid: "",
         description: "",
         date: "",
-        hours: "",
+        hour: "",
         project: "",
         stage: ""
       };
@@ -190,9 +193,9 @@ export default {
     },
     processcrud() {
       if (this.opccrud == "Creación") {
-        this.reportlist.push({...this.newReport});
+        this.proyect.push({...this.newReport});
       } else if (this.opccrud == "Modificación") {
-        this.reportlist[this.actualReport] = {...this.newReport};
+        this.proyect[this.actualReport] = {...this.newReport};
       }
       this.resetcrud();
     }

@@ -91,7 +91,8 @@ export default {
       stageslist: this.$parent.stages,
       pageitemlist: this.$parent.pageitems,
       notificationlist: this.$parent.notifications,
-      projectlist: this.$parent.projects
+      projectlist: this.$parent.projects,
+      proyects: this.$parent.proyect
     }
   }
 }

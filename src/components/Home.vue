@@ -52,7 +52,7 @@
               <i class="fa-solid fa-chart-line"></i> Actividades
             </li>
           </a>
-          <a href="" v-on:click.prevent="$router.push('/proyect')">
+          <a href="" v-on:click.prevent="$router.push('/project')">
             <li class="sidebar-item">
              <i class="fa-solid fa-list-check"></i> Proyectos
             </li>
@@ -92,7 +92,8 @@ export default {
       pageitemlist: this.$parent.pageitems,
       notificationlist: this.$parent.notifications,
       projectlist: this.$parent.projects,
-      proyects: this.$parent.proyect
+      projects: this.$parent.project,
+      projectstages: this.$parent.projectstages
     }
   }
 }

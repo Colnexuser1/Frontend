@@ -31,22 +31,14 @@ export default {
           stage: "Desarrollo"
         }
       ],
-      proyect: [
+      project: [
         {
-          proyectid: "PPM53495",
-          name: "Proyecto Core inmobiliario",
+          projectid: "PPM53495",
+          project: "Proyecto Core inmobiliario",
+          labdate: "2023-12-04",
+          prodate: "2024-01-05",
+          source: "FMCA048458",
           status: "Desarrollo",
-          Source: FMCA048458,
-          labdate: "2023-12-04",
-          prodate: "2024-01-05"
-        },
-        {
-          proyectid: "PPM05845",
-          name: "Modulo nuevo de normalizaciones",
-          status: "2023-12-04",
-          Source: FMCA033486,
-          labdate: "2023-12-04",
-          prodate: "2024-03-04"
         }
       ],
       pageitems: [1, 2],
@@ -56,6 +48,12 @@ export default {
         "Desarrollo",
         "Pruebas",
         "Hecho"
+      ],
+      projectstages: [
+        "Desarrollo",
+        "Laboratorio",
+        "Producción",
+        "Soporte"
       ],
       projects: [
         "Ampliación de cargos fijos",

@@ -6,7 +6,7 @@
     <div class="modal" tabindex="-1" id="activityModal" data-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form v-on:click.prevent="{}" novalidate>
+          <form @submit.prevent="processcrud()" novalidate>
             <div class="modal-header">
               <h5 class="modal-title">{{ opccrud }} de Actividades</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -59,8 +59,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                v-on:click="resetcrud()">Cerrar</button>
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="processcrud()">Guardar</button>
+                @click="resetcrud()">Cerrar</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" @click="processcrud()">Guardar</button>
             </div>
           </form>
         </div>
@@ -145,7 +145,7 @@ export default {
       newReport: {
         title: "",
         description: "",
-        date: "",
+        date: today,
         hours: "",
         project: "",
         stage: ""
@@ -180,18 +180,29 @@ export default {
       this.actualReport = NaN;
     },
     processcrud() {
-      if (this.opccrud == "Creación") {
-        this.reportlist.push({...this.newReport});
-      } else if (this.opccrud == "Modificación") {
-        this.reportlist[this.actualReport] = {...this.newReport};
+      if(this.$refs.form.checkValidity()){
+        if (this.opccrud == "Creación") {
+          this.reportlist.push({...this.newReport});
+        } else if (this.opccrud == "Modificación") {
+          this.reportlist[this.actualReport] = {...this.newReport};
+        }
+        this.resetcrud();
       }
-      this.resetcrud();
+      else{
+        alert("Por verifique los datos del formulario")
+      }
     }
+      
   }
 }
 </script>
 
 <style>
+form input:invalid,
+form textarea:invalid{
+  border-color:#ff0039  ;
+}
+
 .table-contain {
   overflow: auto;
   max-height: 380px;

@@ -52,6 +52,11 @@
               <i class="fa-solid fa-chart-line"></i> Actividades
             </li>
           </a>
+          <a href="" v-on:click.prevent="$router.push('/proyect')">
+            <li class="sidebar-item">
+             <i class="fa-solid fa-list-check"></i> Proyectos
+            </li>
+          </a>
         </ul>
         <div class="logout">
           <ul>

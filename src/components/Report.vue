@@ -116,9 +116,7 @@
       class="pagination-nav">
       <ul class="pagination justify-content-end">
         <li class="page-item disabled">
-          <a class="page-link">
-            <i class="fa-solid fa-chevron-left"></i>
-          </a>
+          <a class="page-link">Previous</a>
         </li>
         <li class="page-item" v-for="item in pageitemlist">
           <a class="page-link">{{ item }}</a>
@@ -194,7 +192,7 @@ export default {
 <style>
 .table-contain {
   overflow: auto;
-  max-height: 380px;
+  max-height: 450px;
 }
 
 .right-search {
@@ -209,7 +207,6 @@ export default {
 
 .pagination-nav {
   margin-right: 35px;
-  border: none;
 }
 
 .total-row {

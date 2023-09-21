@@ -27,7 +27,12 @@
           <ul class="dropdown-menu">
             <li class="dropdown-item">Mi perfil</li>
             <li class="dropdown-divider"></li>
+<<<<<<< HEAD
             <li v-for="user in userslist" class="dropdown-item">{{ user }}</li>
+=======
+            <li class="dropdown-item">Usuario 1</li>
+            <li class="dropdown-item">Usuario 2</li>
+>>>>>>> parent of 6e0d87f (modificaciones 1)
           </ul>
         </div>
         <div class="m-0">
@@ -42,6 +47,7 @@
       <div class="sidebar">
         <ul>
           <li></li>
+<<<<<<< HEAD
           <a href="" v-on:click.prevent="$router.push('/')">
             <li class="sidebar-item">
               <i class="fa-solid fa-house"></i> Dashboard
@@ -51,15 +57,20 @@
             <li class="sidebar-item">
               <i class="fa-solid fa-chart-line"></i> Actividades
             </li>
+=======
+          <a><li class="sidebar-item">
+            <i class="fa-solid fa-house"></i> Dashboard</li>
+          </a>
+          <a><li class="sidebar-item">
+            <i class="fa-solid fa-chart-line"></i> Actividades</li>
+>>>>>>> parent of 6e0d87f (modificaciones 1)
           </a>
         </ul>
         <div class="logout">
           <ul>
-            <a>
-              <li class="sidebar-item">
-                <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
-              </li>
-            </a>
+            <a><li class="sidebar-item">
+              <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+            </li></a>
           </ul>
         </div>
       </div>
@@ -72,11 +83,12 @@
         </div>
         <router-view></router-view>
       </div>
-    </div>
+    </div>  
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 export default {
   name: 'Home',
   data() {
@@ -90,23 +102,33 @@ export default {
     }
   }
 }
+=======
+  export default {
+    name: 'Home'
+  }
+>>>>>>> parent of 6e0d87f (modificaciones 1)
 </script>
 
 <style>
-.logout {
-  height: fit-content;
-  padding: 40px 0;
-}
+  :root {
+    --nav-height: 200px;
+  }
 
-.logout * {
-  margin: 0 auto;
-}
+  .logout {
+    height: fit-content;
+    padding: 40px 0;
+  }
 
-.wrapper-dock {
-  display: flex;
-  flex-grow: 1;
-}
+  .logout * {
+    margin: 0 auto;
+  }
 
-.container-dock {
-  flex: 1;
-}</style>
+  .wrapper-dock {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .container-dock {
+    flex: 1;
+  }
+</style>

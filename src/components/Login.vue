@@ -57,6 +57,11 @@ export default {
         "password": this.passwd
       };
       RequestController.Login(json).then((data) => {
+        if (data.data.error == false) {
+          this.authtoken = data.data.message;
+          this.$router.push('/dashboard');
+        } else {
+          this.msg = data.data.error_msg;
         if (data.status == "400") {
           this.msg = data.data.message;
         } else {

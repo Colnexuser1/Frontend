@@ -9,10 +9,6 @@ export default {
   name: 'App',
   data() {
     return {
-      users: [
-        'Ricardo',
-        'Gonzalo'
-      ],
       reports: [
         {
           title: "PAD1042",

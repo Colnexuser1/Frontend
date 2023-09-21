@@ -22,12 +22,10 @@
         </div>
         <div class="dropdown p-3">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Ver como
+            Administrar
           </a>
           <ul class="dropdown-menu">
-            <li class="dropdown-item">Mi perfil</li>
-            <li class="dropdown-divider"></li>
-            <li v-for="user in userslist" class="dropdown-item">{{ user }}</li>
+            <a href="#" v-on:click.prevent="{}"><li class="dropdown-item">Reportes</li></a>
           </ul>
         </div>
         <div class="m-0">
@@ -81,7 +79,6 @@ export default {
   name: 'Home',
   data() {
     return {
-      userslist: this.$parent.users,
       reportlist: this.$parent.reports,
       stageslist: this.$parent.stages,
       pageitemlist: this.$parent.pageitems,

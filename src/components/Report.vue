@@ -6,7 +6,7 @@
     <div class="modal" tabindex="-1" id="activityModal" data-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form class="needs-validation" v-on:submit.prevent="processcrud()" novalidate>
+          <form v-on:click.prevent="{}" novalidate>
             <div class="modal-header">
               <h5 class="modal-title">{{ opccrud }} de Actividades</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -14,47 +14,44 @@
             </div>
             <div class="modal-body">
               <div class="row">
-                <div class="total-row form-group has-validation">
+                <div class="total-row form-group">
                   <label for="title">Nombre de la actividad:</label>
                   <input v-model="newReport.title" class="form-control shadow-none" type="text" id="title" required>
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group has-validation">
+                <div class="total-row form-group">
                   <label for="description">Descripción de la actividad:</label>
-                  <textarea v-model="newReport.description" id="description" class="form-control shadow-none"
-                    required></textarea>
+                  <textarea v-model="newReport.description" id="description" class="form-control shadow-none" required></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group has-validation">
+                  <div class="form-group">
                     <label for="date">Fecha en que se realiza:</label>
-                    <b-form-datepicker placeholder="" :min="min" :max="max" v-model="newReport.date"
-                      class="form-control shadow-none"
+                    <b-form-datepicker placeholder="" :min="min" :max="max" v-model="newReport.date" class="form-control shadow-none"
                       :date-format-options="{ day: 'numeric', month: 'numeric', year: 'numeric' }" locale="es"
                       id="date"></b-form-datepicker>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group has-validation">
+                  <div class="form-group">
                     <label for="time">Duración en horas:</label>
                     <input type="number" v-model="newReport.hours" class="form-control shadow-none" id="time" required>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group has-validation">
+                <div class="total-row form-group">
                   <label for="project">Nombre del proyecto:</label>
-                  <vue-bootstrap-autocomplete v-model="newReport.project" class="shadow-none" :minMatchingChars="1"
-                    inputClass="shadow-none project-input" id="project" :data="projectlist" />
+                  <vue-bootstrap-autocomplete v-model="newReport.project" class="shadow-none" showAllResults="true" :minMatchingChars="1" inputClass="shadow-none" id="project" :data="projectlist" />
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group has-validation">
+                <div class="total-row form-group">
                   <label for="stage">Seleccione una etapa:</label>
-                  <select v-model="newReport.stage" class="form-select shadow-none" aria-label="Default select example"
-                    id="stage" required>
+                  <select v-model="newReport.stage" class="form-select shadow-none" aria-label="Default select example" id="stage"
+                    required>
                     <option v-for="stage in stagelist">{{ stage }}</option>
                   </select>
                 </div>
@@ -63,7 +60,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                 v-on:click="resetcrud()">Cerrar</button>
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="processcrud()">Guardar</button>
             </div>
           </form>
         </div>
@@ -168,7 +165,7 @@ export default {
     },
     datedit(report) {
       this.opccrud = 'Modificación';
-      this.newReport = { ...report };
+      this.newReport = {...report};
       this.actualReport = this.reportlist.indexOf(report);
     },
     resetcrud() {
@@ -180,86 +177,15 @@ export default {
         project: "",
         stage: ""
       };
-      document.getElementById("title").classList.remove("is-valid", "is-invalid");
-      document.getElementById("description").classList.remove("is-valid", "is-invalid");
-      document.getElementById("date__outer_").classList.remove("is-valid", "is-invalid");
-      document.getElementById("time").classList.remove("is-valid", "is-invalid");
-      document.querySelector(".project-input").classList.remove("is-valid", "is-invalid");
-      document.getElementById("stage").classList.remove("is-valid", "is-invalid");
       this.actualReport = NaN;
     },
     processcrud() {
-      let valid = true;
-      let title = document.getElementById("title");
-      let description = document.getElementById("description");
-      let date = document.getElementById("date__outer_");
-      let hours = document.getElementById("time");
-      let project = document.querySelector(".project-input");
-      let stage = document.getElementById("stage");
-
-      if (this.newReport.title.length <= 0) {
-        title.classList.add("is-invalid");
-        title.classList.remove("is-valid");
-        valid = false;
-      } else {
-        title.classList.add("is-valid");
-        title.classList.remove("is-invalid");
+      if (this.opccrud == "Creación") {
+        this.reportlist.push({...this.newReport});
+      } else if (this.opccrud == "Modificación") {
+        this.reportlist[this.actualReport] = {...this.newReport};
       }
-
-      if (this.newReport.description.length < 5) {
-        description.classList.add("is-invalid");
-        description.classList.remove("is-valid");
-        valid = false;
-      } else {
-        description.classList.add("is-valid");
-        description.classList.remove("is-invalid");
-      }
-
-      if (this.newReport.date == "") {
-        date.classList.add("is-invalid");
-        date.classList.remove("is-valid");
-        valid = false;
-      } else {
-        date.classList.add("is-valid");
-        date.classList.remove("is-invalid");
-      }
-
-      if (this.newReport.hours == 0 || this.newReport.hours > 8 || this.newReport.hours == "") {
-        hours.classList.add("is-invalid");
-        hours.classList.remove("is-valid");
-        valid = false;
-      } else {
-        hours.classList.add("is-valid");
-        hours.classList.remove("is-invalid");
-      }
-
-      if (this.newReport.project.length <= 0 || !this.projectlist.includes(this.newReport.project)) {
-        project.classList.add("is-invalid");
-        project.classList.remove("is-valid");
-        valid = false;
-      } else {
-        project.classList.add("is-valid");
-        project.classList.remove("is-invalid");
-      }
-
-      if (this.newReport.stage.length <= 0 || !this.stagelist.includes(this.newReport.stage)) {
-        stage.classList.add("is-invalid");
-        stage.classList.remove("is-valid");
-        valid = false;
-      } else {
-        stage.classList.add("is-valid");
-        stage.classList.remove("is-invalid");
-      }
-
-      if (valid == true) {
-        if (this.opccrud == "Creación") {
-          this.reportlist.push({ ...this.newReport });
-        } else if (this.opccrud == "Modificación") {
-          this.reportlist[this.actualReport] = { ...this.newReport };
-        }
-        $('#activityModal').modal('hide');
-        this.resetcrud();
-      }
+      this.resetcrud();
     }
   }
 }

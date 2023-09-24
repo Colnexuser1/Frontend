@@ -6,8 +6,6 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
-import datePicker from 'vue-bootstrap-datetimepicker'
-import VueBootstrapAutocomplete from '@vue-bootstrap-components/vue-bootstrap-autocomplete'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -17,9 +15,6 @@ require('@/assets/main.css')
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
-Vue.use(datePicker)
-
-Vue.component('vue-bootstrap-autocomplete', VueBootstrapAutocomplete)
 
 /* eslint-disable no-new */
 new Vue({

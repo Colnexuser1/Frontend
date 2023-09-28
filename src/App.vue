@@ -10,8 +10,8 @@ export default {
   data() {
     return {
       users: [
-        'Ricardo',
-        'Gonzalo'
+        'Ermenejildo',
+        'Aventañado'
       ],
       reports: [
         {

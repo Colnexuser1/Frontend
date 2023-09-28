@@ -14,52 +14,53 @@
             </div>
             <div class="modal-body">
               <div class="row">
-                <div class="total-row form-group">
+                <div class="total-row form-group has-validation">
                   <label for="title">Nombre de la actividad:</label>
-                  <input v-model="newReport.title" class="form-control shadow-none" type="text" id="title" required>
+                  <input v-model="newReport.title" class="form-control shadow-none" type="text" id="title" @input="validateField(newReport.title, (value) => value.length > 0, 'title')" :class="{ 'is-valid': fieldValidation.title, 'is-invalid': !fieldValidation.title }" required>
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group">
+                <div class="total-row form-group has-validation">
                   <label for="description">Descripción de la actividad:</label>
-                  <textarea v-model="newReport.description" id="description" class="form-control shadow-none" required></textarea>
+                  <textarea v-model="newReport.description" id="description" class="form-control shadow-none" @input="validateField(newReport.description, (value) => value.length > 0, 'description')" :class="{ 'is-valid': fieldValidation.description, 'is-invalid': !fieldValidation.description }" required></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group">
+                  <div class="form-group has-validation">
                     <label for="date">Fecha en que se realiza:</label>
-                    <b-form-datepicker placeholder="" :min="min" :max="max" v-model="newReport.date" class="form-control shadow-none"
+                    <b-form-datepicker placeholder="" :min="min" :max="max" v-model="newReport.date"
+                      class="form-control shadow-none"
                       :date-format-options="{ day: 'numeric', month: 'numeric', year: 'numeric' }" locale="es"
                       id="date"></b-form-datepicker>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="time">Duración en horas:</label>
-                    <input type="number" v-model="newReport.hours" class="form-control shadow-none" id="time" required>
+                  <div class="form-group has-validation">
+                    <label for="hours">Duración en horas:</label>
+                    <input type="number" v-model="newReport.hours" class="form-control shadow-none" id="hours" @input="validateField(newReport.hours, (value) => value.length > 0, 'hours')" :class="{ 'is-valid': fieldValidation.hours, 'is-invalid': !fieldValidation.hours }" required>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group">
+                <div class="total-row form-group has-validation">
                   <label for="project">Nombre del proyecto:</label>
-                  <vue-bootstrap-typeahead v-model="newReport.project" class="shadow-none" showAllResults="true" :minMatchingChars="1" inputClass="shadow-none" id="project" :data="projectlist" />
+                  <vue-bootstrap-typeahead v-model="newReport.project" class="shadow-none" :minMatchingChars="1"
+                    inputClass="shadow-none project-input" id="project" :data="projectlist" />
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group">
+                <div class="total-row form-group has-validation">
                   <label for="stage">Seleccione una etapa:</label>
-                  <select v-model="newReport.stage" class="form-select shadow-none" aria-label="Default select example" id="stage"
-                    required>
+                  <select v-model="newReport.stage" class="form-select shadow-none" aria-label="Default select example"
+                    id="stage" required>
                     <option v-for="stage in stagelist">{{ stage }}</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                @click="resetcrud()">Cerrar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  @click="resetcrud()">Cerrar</button>
               <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" @click="processcrud()">Guardar</button>
             </div>
           </form>
@@ -75,7 +76,7 @@
       </div>
       <div class="right-search nav">
         <form class="d-flex" role="search" v-on:click.prevent="">
-          <input class="form-control me-2 shadow-none" type="search" v-model="searchinput" aria-label="Search">
+          <input class="form-control me-2 shadow-none" type="search" aria-label="Search">
           <button class="btn btn-primary" type="submit" v-on:click="searchdata(searchinput)">Buscar</button>
         </form>
       </div>
@@ -141,14 +142,21 @@ export default {
     const mindate = new Date(today);
     mindate.setDate(mindate.getDate() - 3);
     return {
-      actualReport: NaN,
       newReport: {
         title: "",
         description: "",
-        date: today,
+        date: "",
         hours: "",
         project: "",
         stage: ""
+      },
+      fieldValidation: {
+        title: false,
+        description: false,
+        date: false,
+        hours: false,
+        project: false,
+        stage: false
       },
       min: mindate,
       max: today,
@@ -156,18 +164,10 @@ export default {
       reportlist: this.$parent.reportlist,
       stagelist: this.$parent.stageslist,
       pageitemlist: this.$parent.pageitemlist,
-      projectlist: this.$parent.projectlist
-    }
+      projectlist: this.$parent.projectlist,
+    };
   },
   methods: {
-    deletereport(report) {
-      this.reportlist.splice(this.reportlist.indexOf(report), 1);
-    },
-    datedit(report) {
-      this.opccrud = 'Modificación';
-      this.newReport = {...report};
-      this.actualReport = this.reportlist.indexOf(report);
-    },
     resetcrud() {
       this.newReport = {
         title: "",
@@ -177,24 +177,69 @@ export default {
         project: "",
         stage: ""
       };
+      // Restablece todos los estados de validación a falso
+      for (const field in this.fieldValidation) {
+        this.fieldValidation[field] = false;
+      }
       this.actualReport = NaN;
     },
+    // Valida que no esté vacío
+    validateField(value, fieldName) {
+      switch (fieldName) {
+        case 'title':
+          this.fieldValidation.title = value.length > 0;
+          break;
+        case 'description':
+          this.fieldValidation.description = value.length > 5;
+          break;
+        case 'hours':
+          this.fieldValidation.hours = value.length > 0 && value <= 8 && value > 0;
+          break;
+        case 'date':
+          this.fieldValidation.date = value.length > 0;
+          break;
+        case 'stage':
+          this.fieldValidation.stage = value.length > 0;
+          break;
+        case 'project':
+          this.fieldValidation.project = value.length > 0;
+          break;
+      }
+    },
+
+    deletereport(report) {
+      this.reportlist.splice(this.reportlist.indexOf(report), 1);
+    },
+    datedit(report) {
+      this.opccrud = 'Modificación';
+      this.newReport = { ...report };
+      this.actualReport = this.reportlist.indexOf(report);
+    },
+
     processcrud() {
-      if(this.$refs.form.checkValidity()){
+      let valid = true;
+      // Validar que ningun campo esté vacío
+      this.validateField(this.newReport.title, 'title');
+      this.validateField(this.newReport.description, 'description');
+      this.validateField(this.newReport.hours, 'hours');
+      this.validateField(this.newReport.date, 'date');
+      this.validateField(this.newReport.stage, 'stage');
+      this.validateField(this.newReport.project, 'project');
+      const isValid = Object.values(this.fieldValidation).every((valid) => valid);
+      if (isValid) {
         if (this.opccrud == "Creación") {
-          this.reportlist.push({...this.newReport});
+          this.reportlist.push({ ...this.newReport });
         } else if (this.opccrud == "Modificación") {
-          this.reportlist[this.actualReport] = {...this.newReport};
+          this.reportlist[this.actualReport] = { ...this.newReport };
         }
+        $('#activityModal').modal('hide');
         this.resetcrud();
       }
-      else{
-        alert("Por verifique los datos del formulario")
-      }
     }
-      
   }
-}
+};
+
+  
 </script>
 
 <style>
@@ -225,10 +270,5 @@ form textarea:invalid{
 
 .total-row {
   padding: 12px;
-}
-
-.b-calendar .b-calendar-grid {
-  padding: 8px;
-  box-shadow: none;
 }
 </style>

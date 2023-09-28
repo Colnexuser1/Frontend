@@ -39,7 +39,8 @@ export default {
         "Ampliación de cargos fijos",
         "Desembolsos digitales - VMA",
         "Desembolsos digitales - Consulta de cupos"
-      ]
+      ],
+      validated: false
     }
   }
 }

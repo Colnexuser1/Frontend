@@ -51,6 +51,7 @@
             <img src="@/assets/decorador.png">
           </figure>
         </div>
+        <h1>Hello World!</h1>
       </div>
     </div>  
   </div>
@@ -59,7 +60,7 @@
 <script>
   export default {
     name: 'Home',
-    beforeCreate() {
+beforeCreate() {
       if (!this.$parent.validated) {
         this.$router.push('/login');
       }

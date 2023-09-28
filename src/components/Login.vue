@@ -7,7 +7,7 @@
             <img src="@/assets/logo.png">
           </div>
 
-          <div class="text-center m-6">
+          <div class="text-center m-6 main">
             <p>Bienvenido, por favor ingrese sus datos</p>
             <p class="in-alert">{{ msg }}</p>
           </div>
@@ -59,10 +59,15 @@ export default {
         "password": this.passwd
       };
       RequestController.Login(json).then((data) => {
-        console.log(data);
+        this.$parent.validated = true;
+        this.$router.push("/");
       }).catch((error) => {
         if (error.response) {
-          this.msg = error;
+          if (error.response.status == 400) {
+            this.msg = data.data.message;
+          } else {
+            this.msg = error;
+          }
         }
       });
     },

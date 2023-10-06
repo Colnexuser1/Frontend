@@ -46,7 +46,7 @@
                 <div class="total-row form-group has-validation">
                   <label for="project">Nombre del proyecto:</label>
                   <vue-bootstrap-typeahead v-model="newReport.project" class="shadow-none" :minMatchingChars="1"
-                    inputClass="shadow-none project-input" id="project" :data="projectlist" />
+                    inputClass="shadow-none project-input" id="project" :data="projectlist" required/>
                 </div>
               </div>
               <div class="row">
@@ -193,7 +193,7 @@ export default {
           this.fieldValidation.description = value.length > 5;
           break;
         case 'hours':
-          this.fieldValidation.hours = value.length > 0 && value <= 8 && value > 0;
+          this.fieldValidation.hours = value.length > 0 && value <= 9 && value > 0;
           break;
         case 'date':
           this.fieldValidation.date = value.length > 0;

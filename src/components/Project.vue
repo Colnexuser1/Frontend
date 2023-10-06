@@ -6,7 +6,7 @@
     <div class="modal" tabindex="-1" id="projectModal" data-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form v-on:click.prevent="{ }" novalidate>
+          <form @submit.prevent="processcrud()" novalidate>
             <div class="modal-header">
               <h5 class="modal-title">{{ opccrud }} de Proyectos</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -14,21 +14,21 @@
             </div>
             <div class="modal-body">
               <div class="row">
-                <div class="total-row form-group">
+                <div class="total-row form-group has-validation">
                   <label for="projectid">Número del proyecto:</label>
                   <input v-model="newProject.projectid" class="form-control shadow-none" type="text" id="projectid"
-                    required>
+                  @input="validateField(newProject.projectid, (value) => value.length > 0, 'projectid')" :class="{ 'is-valid': fieldValidation.projectid, 'is-invalid': !fieldValidation.projectid }"  required>
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group">
+                <div class="total-row form-group has-validation">
                   <label for="project">Nombre del proyecto:</label>
-                  <input type="text" class="form-control shadow-none" v-model="newProject.project" id="project">
+                  <input type="text" class="form-control shadow-none" v-model="newProject.project" id="project" @input="validateField(newProject.project, (value) => value.length > 0, 'project')" :class="{ 'is-valid': fieldValidation.project, 'is-invalid': !fieldValidation.project }" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group">
+                  <div class="form-group has-validation">
                     <label for="labdate">Fecha de laboratorio:</label>
                     <b-form-datepicker placeholder="" :min="min" v-model="newProject.labdate"
                       class="form-control shadow-none"
@@ -37,7 +37,7 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
+                  <div class="form-group has-validation">
                     <label for="prodate">Fecha producción:</label>
                     <b-form-datepicker placeholder="" :min="min" v-model="newProject.prodate"
                       class="form-control shadow-none"
@@ -47,13 +47,13 @@
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group">
+                <div class="total-row form-group has-validation">
                   <label for="source">Fuente de desarrollo:</label>
-                  <input type="text" id="source" v-model="newProject.source" class="form-control shadow-none">
+                  <input type="text" id="source" v-model="newProject.source" class="form-control shadow-none" @input="validateField(newProject.source, (value) => value.length > 0, 'source')" :class="{ 'is-valid': fieldValidation.source, 'is-invalid': !fieldValidation.source }" required>
                 </div>
               </div>
               <div class="row">
-                <div class="total-row form-group">
+                <div class="total-row form-group has-validation">
                   <label for="status">Etapa del proyecto:</label>
                   <select v-model="newProject.status" class="form-select shadow-none" aria-label="Default select example"
                     id="status" required>
@@ -64,9 +64,9 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                v-on:click="resetcrud()">Cerrar</button>
+                @click="resetcrud()">Cerrar</button>
               <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
-                v-on:click="processcrud()">Guardar</button>
+                @click="processcrud()">Guardar</button>
             </div>
           </form>
         </div>
@@ -155,7 +155,16 @@ export default {
         source: "",
         status: "",
       },
+      fieldValidation: {
+        projectid: false,
+        project: false,
+        labdate: false,
+        prodate: false,
+        source: false,
+        status: false,
+      },
       min: mindate,
+      max: today,
       opccrud: "",
       projectlist: this.$parent.projects,
       projectstages: this.$parent.projectstages,
@@ -174,24 +183,65 @@ export default {
     resetcrud() {
       this.newProject = {
         projectid: "",
-        description: "",
-        date: "",
-        hour: "",
         project: "",
-        stage: ""
+        labdate: "",
+        prodate: "",
+        source: "",
+        status: "",
       };
       this.actualProject = NaN;
+      // Restablece todos los estados de validación a falso
+      for (const field in this.fieldValidation) {
+        this.fieldValidation[field] = false;
+      }
+      this.actualProyect = NaN;
+    },
+    // Valida que no esté vacío
+    validateField(value, fieldName) {
+      switch (fieldName) {
+        case 'projectid':
+          this.fieldValidation.projectid = value.length > 0;
+          break;
+        case 'project':
+          this.fieldValidation.project = value.length > 0;
+          break;
+        case 'labdate':
+          this.fieldValidation.labdate = value.length > 0;
+          break;
+        case 'prodate':
+          this.fieldValidation.prodate = value.length > 0;
+          break;
+        case 'source':
+          this.fieldValidation.source = value.length > 0;
+          break;
+        case 'status':
+          this.fieldValidation.status = value.length > 0;
+          break;
+      }
     },
     processcrud() {
-      if (this.opccrud == "Creación") {
-        this.projectlist.push({ ...this.newProject });
-      } else if (this.opccrud == "Modificación") {
-        this.projectlist[this.actualProject] = { ...this.newProject };
+    let valid = true;
+      // Validar que ningun campo esté vacío
+      this.validateField(this.newProject.projectid, 'projectid');
+      this.validateField(this.newProject.project, 'project');
+      this.validateField(this.newProject.labdate, 'labdate');
+      this.validateField(this.newProject.prodate, 'prodate');
+      this.validateField(this.newProject.source, 'source');
+      this.validateField(this.newProject.status, 'status');
+      const isValid = Object.values(this.fieldValidation).every((valid) => valid);
+      if (isValid) {
+        if (this.opccrud == "Creación") {
+          this.projectlist.push({ ...this.newProject });
+        } else if (this.opccrud == "Modificación") {
+          this.projectlist[this.actualProject] = { ...this.newProject };
+        }
+        $('#activityModal').modal('hide');
+        this.resetcrud();
       }
-      this.resetcrud();
     }
   }
-}
+};
+
 </script>
 
 <style>

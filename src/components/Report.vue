@@ -97,7 +97,7 @@
         </thead>
         <tbody>
           <tr v-for="report in reportlist">
-            <th scope="row">{{ report.date }}</th>
+            <td>{{ report.date }}</td>
             <td>{{ report.description }}</td>
             <td>{{ report.hours }}</td>
             <td>{{ report.title }}</td>

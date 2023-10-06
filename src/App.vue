@@ -31,6 +31,16 @@ export default {
           stage: "Desarrollo"
         }
       ],
+      project: [
+        {
+          projectid: "PPM53495",
+          project: "Proyecto Core inmobiliario",
+          labdate: "2023-12-04",
+          prodate: "2024-01-05",
+          source: "FMCA048458",
+          status: "Desarrollo",
+        }
+      ],
       pageitems: [1, 2],
       notifications: [
       ],
@@ -38,6 +48,12 @@ export default {
         "Desarrollo",
         "Pruebas",
         "Hecho"
+      ],
+      projectstages: [
+        "Desarrollo",
+        "Laboratorio",
+        "Producción",
+        "Soporte"
       ],
       projects: [
         "Ampliación de cargos fijos",

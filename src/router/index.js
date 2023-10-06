@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Error404 from '@/components/Error404'
 import Login from '@/components/Login'
 import Report from '@/components/Report'
+import Project from '@/components/Project'
 
 Vue.use(Router)
 
@@ -18,6 +19,11 @@ export default new Router({
           path: 'report',
           name: 'Report',
           component: Report
+        },
+        {
+          path: 'project',
+          name: 'Project',
+          component: Project
         }
       ]
     },
